@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reality Shift Game - Sonnet 3.7</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .changes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .change-card {
+            background-color: #f0f8ff;
+            border: 2px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .change-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: #2c3e50;
+        }
+        .change-card.selected {
+            background-color: #2c3e50;
+            color: white;
+            border-color: #2c3e50;
+        }
+        .story-container {
+            margin-top: 30px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 5px solid #2c3e50;
+        }
+        .story-container h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .consequences {
+            margin-top: 20px;
+        }
+        .consequence-level {
+            margin-bottom: 15px;
+        }
+        .consequence-level h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1a252f;
+        }
+        .hidden {
+            display: none;
+        }
+
+        .model-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="model-badge">
+        ⚡ Claude Sonnet 3.7
+    </div>
+    
+    <div class="container">
+        <h1>Reality Shift Game</h1>
+        
+        <p>Welcome to the Reality Shift Game! Choose one fundamental change to our reality, and I'll tell you how it would transform our world through a cascade of consequences.</p>
+        
+        <div class="changes-container" id="changesContainer">
+            <!-- Change options will be inserted here by JavaScript -->
+        </div>
+        
+        <button id="exploreButton" class="hidden">Explore This Reality</button>
+        
+        <div id="storyContainer" class="story-container hidden">
+            <!-- Story content will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // The 10 reality changes
+        const realityChanges = [
+            {
+                id: 1,
+                title: "Humans can photosynthesize like plants",
+                story: {
+                    title: "The Green Evolution",
+                    fundamental: "Human biology undergoes a revolutionary adaptation, with skin cells developing chloroplasts capable of converting sunlight into glucose.",
+                    immediate: "Food consumption drops by 60-70% as people only need minimal nutrition to supplement their photosynthesis. The global food industry collapses almost overnight.",
+                    societal: "Work schedules shift to maximize sun exposure. Architecture transforms with glass-dominated buildings. 'Sun breaks' replace lunch breaks. Global hunger nearly disappears, but vitamin deficiencies emerge in northern countries.",
+                    economic: "Agriculture shrinks dramatically, freeing up vast land areas for rewilding. The restaurant industry transforms into specialized social venues rather than necessary food providers. Grocery stores become boutique shops for supplemental nutrients.",
+                    longTerm: "Human migration patterns reverse, with population booms in sunny regions. Economic inequality based on geographic location increases. New cultural rituals emerge around sunbathing. Obesity becomes virtually unknown as caloric needs plummet."
+                }
+            },
+            {
+                id: 2,
+                title: "Gravity is suddenly 50% weaker",
+                story: {
+                    title: "The Great Lightening",
+                    fundamental: "Earth's gravitational pull decreases by half, affecting every physical object on the planet while maintaining our orbit around the sun.",
+                    immediate: "Catastrophic physical effects as objects and liquids not secured down begin floating. Oceans rise into giant bulges, causing massive tsunamis. Buildings designed for normal gravity become unstable.",
+                    societal: "Human movement transforms dramatically. Running and jumping become more efficient but dangerously powerful. Sports records are all broken and new rules established. Elderly and disabled people gain new mobility.",
+                    economic: "Construction industry revolutionizes with lighter materials and different structural requirements. Transportation costs plummet as vehicles require less fuel. Space travel becomes vastly cheaper, triggering a new space race.",
+                    longTerm: "Human physiology adapts with less bone and muscle density. New forms of recreation and transportation emerge, like personal flight suits. Architecture becomes more vertical and fantastical with massive, gravity-defying structures."
+                }
+            },
+            {
+                id: 3,
+                title: "Humans can communicate telepathically",
+                story: {
+                    title: "The Silent Conversation",
+                    fundamental: "Humans develop the ability to transmit and receive thoughts directly from mind to mind, initially with a range of about 100 meters.",
+                    immediate: "Mass confusion and privacy panic as people struggle to control their broadcasting thoughts. Mental noise pollution in densely populated areas becomes overwhelming.",
+                    societal: "Language barriers disappear, but new forms of thought-filtering technology emerge. Truth becomes nearly impossible to hide, transforming politics, relationships, and crime overnight. Educational systems are revolutionized as knowledge can be directly shared.",
+                    economic: "Telecommunications industry collapses while thought-privacy technology booms. Advertising becomes regulated as subliminal messaging becomes too powerful. Entertainment industry transforms to thought-experiences rather than visual/audio media.",
+                    longTerm: "Human culture evolves toward radical honesty as lying becomes nearly impossible. Buildings and cities redesign for telepathic privacy. Psychological disorders related to thought-intrusion become common. Humanity begins to develop a form of collective consciousness."
+                }
+            },
+            {
+                id: 4,
+                title: "All fossil fuels disappear overnight",
+                story: {
+                    title: "The Great Power Down",
+                    fundamental: "All coal, oil, and natural gas deposits on Earth vanish completely, leaving behind empty caverns and dry wells.",
+                    immediate: "Global power crisis as roughly 60% of worldwide electricity generation stops. Transportation networks grind to a halt. Manufacturing and supply chains collapse within days.",
+                    societal: "Initial chaos and hoarding gives way to community power-sharing. Urban areas become partially uninhabitable without heating, cooling, and water pumping systems. Mass migration to areas with functional renewable power.",
+                    economic: "Stock markets crash as energy companies become worthless overnight. Renewable energy stocks soar. A new economy emerges based on human and animal power for basic functions. Global trade reverts to wind-powered shipping.",
+                    longTerm: "After decades of adjustment, a new equilibrium emerges with decentralized power grids and drastically lower energy consumption. Climate change progression halts and begins to reverse. Technology focuses on energy efficiency rather than processing power."
+                }
+            },
+            {
+                id: 5,
+                title: "Average human lifespan extends to 200 years",
+                story: {
+                    title: "The Long Century",
+                    fundamental: "Human cellular degeneration slows dramatically, extending healthy adult life while childhood development remains unchanged.",
+                    immediate: "Healthcare systems become overwhelmed with living elderly populations. Retirement systems collapse as people outlive their savings. Family structures transform with 6-7 generations alive simultaneously.",
+                    societal: "Marriage and relationship expectations transform, with multiple sequential careers and relationships becoming normal. Education systems redesign for lifelong learning rather than front-loaded education. Politics gridlock as older generations maintain power for decades.",
+                    economic: "Pension and social security systems collapse and rebuild with much longer horizons. Housing markets transform as property rarely changes hands. Career paths expand to include multiple complete career changes.",
+                    longTerm: "Human population growth slows but longevity increases total population. Cultural memory extends as people directly remember events from 150+ years ago. Innovation rates may decrease as established power structures remain entrenched longer."
+                }
+            },
+            {
+                id: 6,
+                title: "Water no longer freezes at any temperature",
+                story: {
+                    title: "The Eternal Flow",
+                    fundamental: "The molecular structure of H₂O changes, preventing it from forming crystalline ice regardless of how cold it gets.",
+                    immediate: "Polar ice caps and glaciers melt completely, raising sea levels by over 70 meters. Coastal cities and islands disappear under rising waters. Fresh water cycles are disrupted globally.",
+                    societal: "Mass human migration inland and to higher elevations. Winter recreation industries disappear completely. New forms of architecture emerge for permanently liquid water management.",
+                    economic: "Refrigeration technology must be completely redesigned. Shipping routes open across former polar regions. Massive infrastructure investments in water management and flood control.",
+                    longTerm: "Earth's climate stabilizes into a much warmer, wetter pattern. New forms of marine agriculture replace traditional farming in many regions. Human civilization adapts to a primarily aquatic planet with floating cities and underwater habitation."
+                }
+            },
+            {
+                id: 7,
+                title: "Humans can fly naturally",
+                story: {
+                    title: "The Wingless Ascension",
+                    fundamental: "Humans develop the ability to defy gravity and propel themselves through the air at speeds up to 30 mph without any visible anatomical changes.",
+                    immediate: "Initial accidents and deaths as people learn to control their flight abilities. Air traffic chaos until regulations are established. Property crime increases with easy access to upper floors and rooftops.",
+                    societal: "Transportation patterns transform as short-distance travel becomes predominantly aerial. Urban design revolutionizes with sky parks, aerial walkways, and rooftop social spaces. Privacy concerns emerge with easy aerial observation.",
+                    economic: "Short-haul transportation industries collapse. Real estate values shift dramatically as upper floors become premium access points. New industries emerge around flight safety, training, and enhancement technologies.",
+                    longTerm: "Human settlements spread vertically rather than horizontally. Nature preserves become more accessible, increasing environmental pressure. New sports, art forms, and cultural practices emerge centered around three-dimensional movement."
+                }
+            },
+            {
+                id: 8,
+                title: "Electricity no longer works",
+                story: {
+                    title: "The Great Darkening",
+                    fundamental: "The fundamental physical properties of electrons change, preventing the flow of electric current through any material.",
+                    immediate: "Catastrophic global shutdown of power grids, communications, transportation, and computerized systems. Modern medicine becomes largely non-functional. Mass panic and casualties in hospitals and temperature-extreme regions.",
+                    societal: "Knowledge preservation becomes critical as digital information becomes inaccessible. Communities reorganize around mechanical power sources. Educational systems revert to non-electronic teaching methods.",
+                    economic: "Global economy collapses and rebuilds around mechanical, pneumatic, and chemical energy systems. Banking and finance revert to physical currency and record-keeping. Manufacturing capabilities revert to early 20th century levels.",
+                    longTerm: "Human population decreases and stabilizes at pre-electrical revolution levels. Scientific progress slows dramatically but focuses on alternative technologies. Societies reorganize around regional self-sufficiency rather than global trade."
+                }
+            },
+            {
+                id: 9,
+                title: "All humans suddenly speak the same language",
+                story: {
+                    title: "The Tower of Babel in Reverse",
+                    fundamental: "A new universal language emerges in the minds of all humans, replacing previous linguistic knowledge while maintaining the same concepts and communication abilities.",
+                    immediate: "Initial confusion as written materials become unreadable. Educational systems, legal documents, and historical records require translation. International tensions ease with direct communication.",
+                    societal: "Cultural barriers diminish but don't disappear as underlying values remain different. Global entertainment and media industries transform with single-language production. Educational systems standardize language curriculum worldwide.",
+                    economic: "Translation industry collapses while cross-border trade and collaboration boom. Global companies gain efficiency with standardized communication. Economic opportunities equalize somewhat as language barriers to education and employment disappear.",
+                    longTerm: "Cultural homogenization accelerates, though regional differences persist. New regional dialects eventually begin to emerge despite the universal foundation. Human knowledge advances more quickly with unified scientific and technical vocabulary."
+                }
+            },
+            {
+                id: 10,
+                title: "Animals gain human-level intelligence",
+                story: {
+                    title: "The Great Awakening",
+                    fundamental: "All vertebrate animals develop cognitive abilities comparable to humans, including self-awareness, language capability, and abstract reasoning.",
+                    immediate: "Mass moral crisis as meat industries become effectively forms of cannibalism. Pets assert independence from owners. Wild animals begin organizing and defending territories against human encroachment.",
+                    societal: "Legal systems thrown into chaos regarding animal rights, property, and representation. Religious frameworks struggle with questions of animal souls and moral status. Interspecies communication technologies develop rapidly.",
+                    economic: "Meat and animal product industries collapse completely. Animals begin demanding payment for labor and services previously forced upon them. New economic sectors emerge around interspecies trade, services, and accommodations.",
+                    longTerm: "Human population growth restricted as animals claim territorial rights. Political systems transform to include non-human representatives. Technology develops to accommodate diverse animal needs and abilities. A new multispecies civilization emerges."
+                }
+            }
+        ];
+
+        // DOM elements
+        const changesContainer = document.getElementById('changesContainer');
+        const exploreButton = document.getElementById('exploreButton');
+        const storyContainer = document.getElementById('storyContainer');
+        
+        let selectedChange = null;
+
+        // Create change cards
+        realityChanges.forEach(change => {
+            const card = document.createElement('div');
+            card.className = 'change-card';
+            card.dataset.id = change.id;
+            card.textContent = change.title;
+            
+            card.addEventListener('click', () => {
+                // Clear any previously selected cards
+                document.querySelectorAll('.change-card').forEach(c => {
+                    c.classList.remove('selected');
+                });
+                
+                // Select this card
+                card.classList.add('selected');
+                selectedChange = change;
+                
+                // Show the explore button
+                exploreButton.classList.remove('hidden');
+                
+                // Hide the story container if it's visible
+                storyContainer.classList.add('hidden');
+            });
+            
+            changesContainer.appendChild(card);
+        });
+
+        // Explore button click handler
+        exploreButton.addEventListener('click', () => {
+            if (selectedChange) {
+                generateStory(selectedChange);
+                storyContainer.classList.remove('hidden');
+                
+                // Scroll to the story
+                storyContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Generate the story based on the selected change
+        function generateStory(change) {
+            const story = change.story;
+            
+            storyContainer.innerHTML = `
+                <h3>${story.title}</h3>
+                <p>What if <strong>${change.title.toLowerCase()}</strong>? Let's explore the cascading consequences...</p>
+                
+                <div class="consequences">
+                    <div class="consequence-level">
+                        <h4>Fundamental Shift</h4>
+                        <p>${story.fundamental}</p>
+                    </div>
+                    
+                    <div class="consequence-level">
+                        <h4>Immediate Effects</h4>
+                        <p>${story.immediate}</p>
+                    </div>
+                    
+                    <div class="consequence-level">
+                        <h4>Societal Transformation</h4>
+                        <p>${story.societal}</p>
+                    </div>
+                    
+                    <div class="consequence-level">
+                        <h4>Economic Ripples</h4>
+                        <p>${story.economic}</p>
+                    </div>
+                    
+                    <div class="consequence-level">
+                        <h4>Long-Term Evolution</h4>
+                        <p>${story.longTerm}</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
