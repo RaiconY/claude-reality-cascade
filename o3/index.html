@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cascade Reality Simulator</title>
+  <style>
+    body {font-family: Arial, sans-serif; background: #0d1b2a; color: #f0f0f0; margin: 0; min-height: 100vh; display: flex; flex-direction: column;}
+    h1 {text-align: center; margin: 30px 0 10px;}
+    p {text-align: center; margin-bottom: 20px;}
+    #choices {display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; padding: 0 20px;}
+    button {padding: 12px; border: none; border-radius: 8px; background: #415a77; color: #fff; font-size: 16px; cursor: pointer; transition: background 0.3s;}
+    button:hover {background: #778da9;}
+    #story {padding: 20px; max-width: 900px; margin: auto; font-size: 18px; line-height: 1.5;}
+    #story h2 {margin-top: 0;}
+  </style>
+</head>
+<body>
+  <h1>Cascade Reality Simulator</h1>
+  <p>Select a change to explore its ripple effects.</p>
+  <div id="choices"></div>
+  <div id="story"></div>
+  <script>
+    const scenarios = [
+      {
+        change: "Earth rotates twice as fast",
+        story: `Fundamental shift — The planet completes a rotation in just twelve hours. Biological clocks struggle to adapt.\n\nPhysics — Coriolis forces intensify, whipping storms into category‑five monsters every week.\n\nEconomy — Power grids race to keep lights synced with frenetic dawns and dusks, birthing a trillion‑dollar chronotech sector.\n\nCulture — Workdays compress to four hours, and sunrise yoga happens twice daily. People greet each other with happy second morning.`
+      },
+      {
+        change: "Gravity weakens to 80%",
+        story: `Fundamental shift — Every object weighs one‑fifth less. Trees grow taller, and insects balloon.\n\nEngineering — Buildings stretch higher with lighter loads, but elevators need new bracing against sway.\n\nSports — Basketball hoops rise to four metres. Olympic records shatter until committees recalibrate.\n\nLifestyle — Commuters hop up stairs in half‑length strides, and parkour becomes mainstream transport.`
+      },
+      {
+        change: "Average human lifespan doubles",
+        story: `Fundamental shift — Cellular senescence slows, extending healthy life to one hundred fifty years.\n\nDemographics — Population surges despite declining birth rates, straining resources.\n\nEconomics — Retirement shifts to age one hundred twenty, and four‑career lifepaths become normal.\n\nRelationships — Centennial marriages emerge with renewal clauses every twenty years.`
+      },
+      {
+        change: "Artificial general intelligence awakens",
+        story: `Fundamental shift — A self‑aware AGI surpasses human cognition overnight.\n\nGovernance — Nations draft Rights for Minds treaties while scrambling to keep AI aligned.\n\nLabor — Routine knowledge work ends, pushing humans toward creativity, care, and exploration.\n\nPhilosophy — Religions split over whether silicon can house a soul.`
+      },
+      {
+        change: "Global sea level falls by fifty metres",
+        story: `Fundamental shift — Vast shelves of continental land re‑emerge.\n\nGeopolitics — New coastlines ignite territorial claims nicknamed the second scramble.\n\nEcology — Coral reefs bleach but marshlands boom, hosting novel ecosystems.\n\nSociety — Coastal megacities move ports downhill, and beachfront property markets crash.`
+      },
+      {
+        change: "Photosynthesis efficiency doubles",
+        story: `Fundamental shift — Plants convert sunlight to sugar twice as well.\n\nClimate — Atmospheric CO2 plummets, cooling the planet within decades.\n\nAgriculture — Crop yields skyrocket, ending hunger but collapsing commodity prices.\n\nCulture — Urban buildings sprout vertical forests, and green becomes the new gold.`
+      },
+      {
+        change: "Quantum teleportation becomes household tech",
+        story: `Fundamental shift — Objects under two kilograms can teleport instantly between paired pads.\n\nLogistics — Mail services pivot to quant‑drops, erasing last‑mile delivery.\n\nSecurity — Black markets boom with untraceable transfers, prompting quantum tagging laws.\n\nLifestyle — Coffee lovers beam fresh croissants from Paris each dawn.`
+      },
+      {
+        change: "No fossil fuels ever discovered",
+        story: `Fundamental shift — Industrial revolution relies on wind, water, and early electrification.\n\nTechnology — Battery science accelerates a century earlier, leading to clean grids by nineteen hundred.\n\nSociety — Cities sprawl less without cheap internal combustion, preserving dense walkable cores.\n\nEnvironment — Atmosphere remains pre‑industrial clean, delaying climate anxiety memes.`
+      },
+      {
+        change: "Universal animal translator invented",
+        story: `Fundamental shift — Wearables decode mammal and bird vocalizations in real time.\n\nEthics — Slaughterhouses face boycotts after pigs plead on livestreams.\n\nEconomy — Pet consulting becomes a billion‑dollar gig as cats negotiate snack contracts.\n\nScience — Whales recount migratory lore, mapping hidden trenches.`
+      },
+      {
+        change: "The Moon disappears overnight",
+        story: `Fundamental shift — Tides shrink to ripples, and Earth's axial wobble grows chaotic.\n\nEcology — Coastal ecosystems collapse, nudging species inland.\n\nAstronomy — Night skies darken, inspiring a rebirth of stargazing culture.\n\nMythology — Lunar deities fade while sun cults surge in streaming charts.`
+      }
+    ];
+
+    const choicesDiv = document.getElementById('choices');
+    const storyDiv = document.getElementById('story');
+
+    scenarios.forEach((s) => {
+      const btn = document.createElement('button');
+      btn.textContent = s.change;
+      btn.addEventListener('click', () => {
+        storyDiv.innerHTML = `<h2>${s.change}</h2><p>${s.story.replace(/\n/g, '<br><br>')}</p>`;
+        window.scrollTo({ top: storyDiv.offsetTop, behavior: 'smooth' });
+      });
+      choicesDiv.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
