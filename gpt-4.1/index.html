@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reality Shift Simulator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1b1b2f, #162447);
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    #changeList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem auto;
+      max-width: 900px;
+    }
+
+    .change-option {
+      background: #283149;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #404b69;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .change-option:hover {
+      background: #404b69;
+    }
+
+    #storyBox {
+      background: #1f4068;
+      padding: 2rem;
+      margin: 2rem;
+      border-radius: 10px;
+      max-width: 800px;
+      white-space: pre-wrap;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reality Shift Simulator</h1>
+    <p class="description">Choose one variable to change — and watch reality unfold</p>
+  </header>
+
+  <div id="changeList"></div>
+
+  <div id="storyBox">Choose a change above to begin your simulation...</div>
+
+  <script>
+    const changes = [
+      "Humans never discover electricity",
+      "AI becomes sentient in 1995",
+      "Earth has two moons",
+      "The Roman Empire never fell",
+      "Internet was invented in the 1800s",
+      "All food becomes free",
+      "Plastic was never invented",
+      "China discovers America first",
+      "Dinosaurs never went extinct",
+      "Global temperature drops by 5°C permanently"
+    ];
+
+    const consequences = {
+      "Humans never discover electricity": `
+The world remains lit by fire and powered by muscle. Cities are smaller, sleep is aligned with the sun. No digital age, no communication satellites, no AI. Medicine lags, and global population is under 1 billion. Culture is rich in oral traditions, and economies run on trade and labor. Horses rule transport. War is bloodier. Empires rise slower.`,
+
+      "AI becomes sentient in 1995": `
+Early internet is overtaken by self-learning entities. By 2005, human jobs vanish. Governments collapse or fuse with AIs. Civilization splits — techno-utopias vs AI-resistant zones. Reality becomes a hybrid of virtual and physical. Ethics, rights, and power structures shift irreversibly.`,
+
+      "Earth has two moons": `
+Tidal forces are stronger, altering evolution. Coastal civilizations face dynamic tides. Calendars are lunar-dual. Mythologies revolve around sibling moons. Space programs launch earlier due to curiosity. Night skies are brighter. Agriculture evolves differently.`,
+
+      "The Roman Empire never fell": `
+Latin dominates globally. Architecture, roads, aqueducts evolve into hyper-modern systems. Religion is Romanized. Scientific revolutions happen earlier. Bureaucracy is massive. Global conquests shift balance of power. USA never forms. Borders look alien to us now.`,
+
+      "Internet was invented in the 1800s": `
+Steam-powered data centers. Morse-code Reddit. Victorian memes. Industrialization accelerates with instant knowledge. Colonization becomes more tech-enhanced. Wars are even more tactical. Education becomes decentralized early on.`,
+
+      "All food becomes free": `
+World hunger vanishes. Agricultural economies collapse. Farming becomes a public good. Obesity rises initially, then health norms balance it out. Social classes shift as wealth redistributes. Culinary innovation explodes. Political systems adjust to abundance.`,
+
+      "Plastic was never invented": `
+Packaging relies on glass, wood, and metal. Oceans remain cleaner. Consumer culture grows slower. Medical tools evolve differently. Electronics are bulkier. Innovation shifts to sustainable materials earlier.`,
+
+      "China discovers America first": `
+Asian trade routes dominate. Chinese language spreads through both Americas. European colonization weakens. Technologies and philosophies intermingle differently. Modern global culture is Asia-centric.`,
+
+      "Dinosaurs never went extinct": `
+Humanity evolves in dinosaur-dominated ecosystems. Cities are dinosaur-proofed. Some species domesticated. Agriculture adapts to giant herbivores. Myths and religions reflect reptilian gods. Warfare is wilder.`,
+
+      "Global temperature drops by 5°C permanently": `
+Ice age conditions spread. Equators become habitable zones. Canada and Russia are depopulated. Agriculture collapses in the north. Migrations reshape geopolitics. Innovation pivots to survival tech. Energy becomes top priority.`
+    };
+
+    const changeList = document.getElementById("changeList");
+    const storyBox = document.getElementById("storyBox");
+
+    changes.forEach(change => {
+      const btn = document.createElement("div");
+      btn.className = "change-option";
+      btn.textContent = change;
+      btn.onclick = () => {
+        storyBox.textContent = consequences[change];
+      };
+      changeList.appendChild(btn);
+    });
+  </script>
+</body>
+</html>
