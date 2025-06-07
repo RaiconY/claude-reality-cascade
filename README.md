@@ -4,12 +4,12 @@
 
 | Модель | Демо | Исходный код | Особенности |
 |--------|------|-------------|-------------|
-| **🟠 Opus 4** | <a href="https://claude.ai/public/artifacts/8ea64265-e85e-41a0-b3ae-9f1f46e077e5" target="_blank">▶️ Играть</a> | [📁 Код](./opus-4/) | React компонент, прогресс-бар, модульная архитектура |
-| **🟢 Sonnet 4** | <a href="https://raicony.github.io/claude-reality-cascade/sonnet-4/" target="_blank">▶️ Играть</a> | [📁 Код](./sonnet-4/) | Градиентный дизайн, анимированные секции, адаптивная вёрстка |
-| **⚪ Sonnet 3.7** | <a href="https://raicony.github.io/claude-reality-cascade/sonnet-3.7/" target="_blank">▶️ Играть</a> | [📁 Код](./sonnet-3.7/) | Пять аналитических разделов, структурированный код |
-| **🔧 GPT Codex** | <a href="https://raicony.github.io/claude-reality-cascade/codex/" target="_blank">▶️ Играть</a> | [📁 Код](./codex/) | Современный ES6+, минималистичный дизайн |
-| **🔬 GPT o3** | <a href="https://raicony.github.io/claude-reality-cascade/o3/" target="_blank">▶️ Играть</a> | [📁 Код](./o3/) | Простейший код, плавный скроллинг |
-| **🤖 GPT 4.1** | <a href="https://raicony.github.io/claude-reality-cascade/gpt-4.1/" target="_blank">▶️ Играть</a> | [📁 Код](./gpt-4.1/) | Адаптивные мета-теги, компактная реализация |
+| **🟠 Opus 4** | <a href="https://claude.ai/public/artifacts/8ea64265-e85e-41a0-b3ae-9f1f46e077e5" target="_blank">▶️ Играть</a> | <a href="./opus-4/" target="_blank">📁 Код</a> | React компонент, прогресс-бар, модульная архитектура |
+| **🟢 Sonnet 4** | <a href="https://raicony.github.io/claude-reality-cascade/sonnet-4/" target="_blank">▶️ Играть</a> | <a href="./sonnet-4/" target="_blank">📁 Код</a> | Градиентный дизайн, анимированные секции, адаптивная вёрстка |
+| **⚪ Sonnet 3.7** | <a href="https://raicony.github.io/claude-reality-cascade/sonnet-3.7/" target="_blank">▶️ Играть</a> | <a href="./sonnet-3.7/" target="_blank">📁 Код</a> | Пять аналитических разделов, структурированный код |
+| **🔧 GPT Codex** | <a href="https://raicony.github.io/claude-reality-cascade/codex/" target="_blank">▶️ Играть</a> | <a href="./codex/" target="_blank">📁 Код</a> | Современный ES6+, минималистичный дизайн |
+| **🔬 GPT o3** | <a href="https://raicony.github.io/claude-reality-cascade/o3/" target="_blank">▶️ Играть</a> | <a href="./o3/" target="_blank">📁 Код</a> | Простейший код, плавный скроллинг |
+| **🤖 GPT 4.1** | <a href="https://raicony.github.io/claude-reality-cascade/gpt-4.1/" target="_blank">▶️ Играть</a> | <a href="./gpt-4.1/" target="_blank">📁 Код</a> | Адаптивные мета-теги, компактная реализация |
 
 ## 📬 Исходный промпт для всех моделей
 
